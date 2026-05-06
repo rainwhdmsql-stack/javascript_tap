@@ -22,11 +22,12 @@
 
       /* 상세보기 */
       .detail-wrap {
+        position: relative;
         width: 200px;
       }
       .imgBox {
         width: 200px;
-        height: 300px;
+        height: 200px;
         overflow: hidden;
         /* background-color: red; */
       }
@@ -39,6 +40,19 @@
       .more-btn {
         margin: auto;
         display: block;
+      }
+      .fade-area {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+
+        background: linear-gradient(
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.9)
+        );
       }
     </style>
   </head>
@@ -57,33 +71,41 @@
       <div class="imgBox">
         <img src="images/detail.png" alt="상세 페이지" />
       </div>
-      <button class="more-btn">더보기</button>
+      <div class="fade-area">
+        <button class="more-btn">더보기</button>
+      </div>
     </div>
     <script>
-              const btns = document.querySelectorAll(".tab-btn");
-              const contents = document.querySelectorAll(".tab-content");
-              btns.forEach((btn, index) => {
-                // console.log(btn,index)
-                btn.addEventListener("click", () => {
-                  // console.log("click")
-                  // 1. 모든 버튼 off
-                  btns.forEach((b) => b.classList.remove("active"));
-                  // 모든 내용 off
-                  contents.forEach((c) => c.classList.remove("active"));
-                  // 3. 클릭한 버튼 on
-                  btn.classList.add("active");
-                  // 4. 같은 번호 내용 on
-                  //   console.log([contents]);
-                  contents[index].classList.add("active");
-                });
-              });
+      const btns = document.querySelectorAll(".tab-btn");
+      const contents = document.querySelectorAll(".tab-content");
+      btns.forEach((btn, index) => {
+        // console.log(btn,index)
+        btn.addEventListener("click", () => {
+          // console.log("click")
+          // 1. 모든 버튼 off
+          btns.forEach((b) => b.classList.remove("active"));
+          // 모든 내용 off
+          contents.forEach((c) => c.classList.remove("active"));
+          // 3. 클릭한 버튼 on
+          btn.classList.add("active");
+          // 4. 같은 번호 내용 on
+          //   console.log([contents]);
+          contents[index].classList.add("active");
+        });
+      });
 
-            //   상세 - 더보기 버튼 클릭시
-            const detailBtn = document.querySelector(".more-btn")
-            const imgBox = document.querySelector(".imgBox")
-            detailBtn.addEventListener("click" , ()=> {
-      imgBox.classList.toggle("active")
-            })
+      //   상세 - 더보기 버튼 클릭시
+      const detailBtn = document.querySelector(".more-btn");
+      const imgBox = document.querySelector(".imgBox");
+      detailBtn.addEventListener("click", () => {
+        imgBox.classList.toggle("active");
+        // 버튼 글자 밖뚜기
+        if (imgBox.classList.contains("active")) {
+          detailBtn.textContent = "접기";
+        } else {
+          detailBtn.textContent = "더보기";
+        }
+      });
     </script>
   </body>
 </html>
